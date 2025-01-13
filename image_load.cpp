@@ -293,7 +293,7 @@ loaderStatusTuple ImageLoader::dataSend(const uint8_t* pData, size_t length,
         {
             return {loaderStatusCode::LOADER_ERROR_MSG_RESPONSE_LENGTH, "Response of invalid size has been received"};
         }
-        crc = this->calcCrc16(reinterpret_cast<const uint8_t*>(&response.code), sizeof(loaderResponseStatusCode));
+        crc = this->calcCrc16(reinterpret_cast<const uint8_t*>(&response.code), sizeof(loaderResponseStatusCode), 0x55aa55aa);
         if(crc != response.crc)
         {
             return {loaderStatusCode::LOADER_ERROR_MSG_CHECKSUM_CHUNK, "The response with incorrect checksum has been received"};
